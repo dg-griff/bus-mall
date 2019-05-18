@@ -12,25 +12,31 @@ function prodImagePath(productName) {
     return `img/${productName}.${imageExtension}`;
 } 
 
-function displayImage() {
+function displayImage(index) {
     var prodDisplay = document.getElementById("display");
     var prodImage = document.createElement("img");
-    var index = Math.floor(Math.random() * products.length);
+  
     var imageSource = prodImagePath(products[index]);
     prodImage.setAttribute("src", imageSource);
     prodImage.setAttribute("id", products[index]);
     prodImage.addEventListener("click", handler);
+    var product = searchFor(products[index]);
+    product.shown++;
+    console.log(productData[index]);
     prodDisplay.appendChild(prodImage);
 }
 
 function handler(event) {
     var search = event.target.id;
     console.log(search);
-    for (var k = 0; k < productData.length; k++) {
-        if (search === productData[k].name) {
-            productData[k].click++;
-            console.log(`${search} has been clicked ${productData[k].click} time(s).`);
-            break;
+    var product = searchFor(search);
+    product.click++;
+}
+
+function searchFor (searchTerm) {
+    for (var h = 0; h < productData.length; h++) {
+        if (searchTerm === productData[h].name) {
+            return productData[h];
         }
     }
 }
@@ -49,12 +55,22 @@ var displayCount = 3;
 var productData = [];
 var click = 0;
 
-// Display 3 images
-for (var i = 0; i < displayCount; i++) {
-    displayImage();
-}
-
 // Create an object for each product
 for (var j = 0; j < products.length; j++) {
     var productModel = new Product(products[j]);
+}
+
+// Display 3 images
+    // Ensure 3 unique images are displayed each time
+var lastIndex = [];
+for (var i = 0; i < displayCount; i++) {
+    if (lastIndex.length === 20) {
+        debugger;
+    }
+    do {
+        var index = Math.floor(Math.random() * products.length);
+    } while (lastIndex.indexOf(index) >= 0);
+    lastIndex.push(index);
+    // console.log(index);
+    displayImage(index);
 }
