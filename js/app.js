@@ -12,7 +12,7 @@ function prodImagePath(productName) {
     return `img/${productName}.${imageExtension}`;
 } 
 
-function displayImage(index) {
+function createImage(index) {
     var prodDisplay = document.getElementById("display");
     var prodImage = document.createElement("img");
   
@@ -31,6 +31,7 @@ function handler(event) {
     console.log(search);
     var product = searchFor(search);
     product.click++;
+    displayImages();
 }
 
 function searchFor (searchTerm) {
@@ -38,6 +39,25 @@ function searchFor (searchTerm) {
         if (searchTerm === productData[h].name) {
             return productData[h];
         }
+    }
+}
+
+function displayImages () {
+    // Clearing the page of previous images
+    document.getElementById("display").innerHTML = "";
+    // Display 3 images
+        // Ensure 3 unique images are displayed each time
+    var lastIndex = [];
+    for (var i = 0; i < displayCount; i++) {
+        if (lastIndex.length === 20) {
+        debugger;
+        }
+    do {
+        var index = Math.floor(Math.random() * products.length);
+        } while (lastIndex.indexOf(index) >= 0);
+    lastIndex.push(index);
+    console.log(index);
+    createImage(index);
     }
 }
 
@@ -60,17 +80,5 @@ for (var j = 0; j < products.length; j++) {
     var productModel = new Product(products[j]);
 }
 
-// Display 3 images
-    // Ensure 3 unique images are displayed each time
-var lastIndex = [];
-for (var i = 0; i < displayCount; i++) {
-    if (lastIndex.length === 20) {
-        debugger;
-    }
-    do {
-        var index = Math.floor(Math.random() * products.length);
-    } while (lastIndex.indexOf(index) >= 0);
-    lastIndex.push(index);
-    // console.log(index);
-    displayImage(index);
-}
+// Generate new image set
+displayImages();
