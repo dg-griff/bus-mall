@@ -15,6 +15,7 @@ function prodImagePath(productName) {
 function createImage(index) {
     var prodDisplay = document.getElementById("display");
     var prodImage = document.createElement("img");
+    var productVote;
   
     var imageSource = prodImagePath(products[index]);
     prodImage.setAttribute("src", imageSource);
@@ -24,6 +25,14 @@ function createImage(index) {
     product.shown++;
     console.log(productData[index]);
     prodDisplay.appendChild(prodImage);
+
+    if (votes === 25) {
+        prodImage.removeEventListener("click", handler);
+        for (var k = 0; k < productData.length; k++) {
+           productVote = document.getElementById("display");
+          console.log(`${productData[k].click} votes for ${productData[k].name}`);
+        }
+    }
 }
 
 function handler(event) {
@@ -31,6 +40,7 @@ function handler(event) {
     console.log(search);
     var product = searchFor(search);
     product.click++;
+    votes++;
     displayImages();
 }
 
@@ -59,6 +69,7 @@ function displayImages () {
     console.log(index);
     createImage(index);
     }
+    console.log(votes);
 }
 
 /* Object Constructor */
@@ -73,7 +84,7 @@ function Product(name) {
 var products = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn','usb', 'water-can', 'wine-glass' ];
 var displayCount = 3;
 var productData = [];
-var click = 0;
+var votes = 0;
 
 // Create an object for each product
 for (var j = 0; j < products.length; j++) {
@@ -82,3 +93,4 @@ for (var j = 0; j < products.length; j++) {
 
 // Generate new image set
 displayImages();
+
