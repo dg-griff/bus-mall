@@ -24,7 +24,6 @@ function createImage(index) {
     prodImage.addEventListener("click", handler);
     var product = searchFor(products[index]);
     product.shown++;
-    console.log(productData[index]);
     prodDisplay.appendChild(prodImage);
 
     // Turn off event listener and display results after 25 clicks
@@ -76,10 +75,14 @@ function displayImages () {
         var index = Math.floor(Math.random() * products.length);
         } while (lastIndex.indexOf(index) >= 0);
     lastIndex.push(index);
-    console.log(index);
     createImage(index);
     }
     console.log(votes);
+}
+
+// Create function that saves results to local storage
+function saveResults () {
+    localStorage.setItem('userResults', JSON.stringify(productData));
 }
 
 /* Object Constructor */
@@ -105,4 +108,7 @@ for (var j = 0; j < products.length; j++) {
 
 // Generate new image set
 displayImages();
+
+// Save Results to Local Storage
+saveResults();
 
