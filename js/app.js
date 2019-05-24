@@ -81,8 +81,22 @@ function displayImages () {
 }
 
 // Create function that saves results to local storage
-function saveResults () {
+function saveResults() {
     localStorage.setItem('userResults', JSON.stringify(productData));
+}
+
+// Create function that retrieves data from local storage
+function getResults() {
+    var userResults = JSON.parse(localStorage.getItem('userResults'));
+    if (userResults) {
+        console.log('User Results already saved!');
+        results = userResults;
+    }
+}
+
+// Create function that clears data in Local Storage
+function handleStorageClear() {
+    localStorage.clear();
 }
 
 /* Object Constructor */
@@ -100,6 +114,8 @@ var products = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 
 var displayCount = 3;
 var productData = [];
 var votes = 0;
+var clearStorage = document.getElementById('clear-local');
+clearStorage.addEventListener('click', handleStorageClear);
 
 // Create an object for each product
 for (var j = 0; j < products.length; j++) {
@@ -112,3 +128,5 @@ displayImages();
 // Save Results to Local Storage
 saveResults();
 
+// Retrieve results from Local Storage
+getResults();
