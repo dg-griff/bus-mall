@@ -27,16 +27,18 @@ function createImage(index) {
     console.log(productData[index]);
     prodDisplay.appendChild(prodImage);
 
+    // Turn off event listener and display results after 25 clicks
     if (votes === 25) {
         prodImage.removeEventListener("click", handler);
         document.getElementById("display").innerHTML = "";
-            var productList = document.createElement("ul");
+        document.getElementById("display").innerHTML = "<h1>Results</h1>";
+        var productList = document.createElement("ul");
         for (var k = 0; k < productData.length; k++) {
            productVote = document.getElementById("display");
            productItem = document.createElement("li");
            productItem.textContent = `${productData[k].click} votes for the ${productData[k].name}`;
            productList.appendChild(productItem);
-           console.log(`${productData[k].click} votes for the ${productData[k].name}`);
+        //    console.log(`${productData[k].click} votes for the ${productData[k].name}`);
         }
         productVote.appendChild(productList);
     }
