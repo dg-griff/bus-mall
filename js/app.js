@@ -33,12 +33,13 @@ function createImage(index) {
         document.getElementById("display").innerHTML = "";
         document.getElementById("display").innerHTML = "<h1>Results</h1>";
         var productList = document.createElement("ul");
+        var productPercent;
         for (var k = 0; k < productData.length; k++) {
            productVote = document.getElementById("display");
            productItem = document.createElement("li");
-           productItem.textContent = `${productData[k].click} votes for the ${productData[k].name}`;
+           productPercent = Math.floor((productData[k].click / productData[k].shown) * 100);
+           productItem.textContent = `${productData[k].click} votes (${productPercent}%) for the ${productData[k].name}`;
            productList.appendChild(productItem);
-        //    console.log(`${productData[k].click} votes for the ${productData[k].name}`);
         }
         productVote.appendChild(productList);
     }
