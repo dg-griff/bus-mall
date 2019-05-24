@@ -1,0 +1,18 @@
+body {
+    margin: 0 5px 0 5px;
+}
+
+img {
+    width: 30%;
+    margin: 30px 1.66% 15px 1.66%;
+}
+
+h1 {
+    margin: 10px 0 10px 0;
+    font-size: 1.5em;
+}
+
+h5 {
+    margin: 20px 0 20px 0;
+    text-align: center;
+}
