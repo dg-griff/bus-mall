@@ -24,7 +24,6 @@ function createImage(index) {
     prodImage.addEventListener("click", handler);
     var product = searchFor(products[index]);
     product.shown++;
-    console.log(productData[index]);
     prodDisplay.appendChild(prodImage);
 
     // Turn off event listener and display results after 25 clicks
@@ -76,10 +75,28 @@ function displayImages () {
         var index = Math.floor(Math.random() * products.length);
         } while (lastIndex.indexOf(index) >= 0);
     lastIndex.push(index);
-    console.log(index);
     createImage(index);
     }
     console.log(votes);
+}
+
+// Create function that saves results to local storage
+function saveResults() {
+    localStorage.setItem('userResults', JSON.stringify(productData));
+}
+
+// Create function that retrieves data from local storage
+function getResults() {
+    var userResults = JSON.parse(localStorage.getItem('userResults'));
+    if (userResults) {
+        console.log('User Results already saved!');
+        results = userResults;
+    }
+}
+
+// Create function that clears data in Local Storage
+function handleStorageClear() {
+    localStorage.clear();
 }
 
 /* Object Constructor */
@@ -97,6 +114,8 @@ var products = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 
 var displayCount = 3;
 var productData = [];
 var votes = 0;
+var clearStorage = document.getElementById('clear-local');
+clearStorage.addEventListener('click', handleStorageClear);
 
 // Create an object for each product
 for (var j = 0; j < products.length; j++) {
@@ -106,3 +125,8 @@ for (var j = 0; j < products.length; j++) {
 // Generate new image set
 displayImages();
 
+// Save Results to Local Storage
+saveResults();
+
+// Retrieve results from Local Storage
+getResults();
