@@ -16,6 +16,7 @@ function createImage(index) {
     var prodDisplay = document.getElementById("display");
     var prodImage = document.createElement("img");
     var productVote;
+    var productItem;
   
     var imageSource = prodImagePath(products[index]);
     prodImage.setAttribute("src", imageSource);
@@ -28,10 +29,16 @@ function createImage(index) {
 
     if (votes === 25) {
         prodImage.removeEventListener("click", handler);
+        document.getElementById("display").innerHTML = "";
+            var productList = document.createElement("ul");
         for (var k = 0; k < productData.length; k++) {
            productVote = document.getElementById("display");
-          console.log(`${productData[k].click} votes for ${productData[k].name}`);
+           productItem = document.createElement("li");
+           productItem.textContent = `${productData[k].click} votes for the ${productData[k].name}`;
+           productList.appendChild(productItem);
+           console.log(`${productData[k].click} votes for the ${productData[k].name}`);
         }
+        productVote.appendChild(productList);
     }
 }
 
