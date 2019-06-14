@@ -50,7 +50,14 @@ function handler(event) {
     var product = searchFor(search);
     product.click++;
     votes++;
+    console.log(`You have clicked ${search} ${product.click} times`);
+    
     displayImages();
+    if (votes === 25) {
+        document.getElementById("display").innerHTML = "";
+        saveResults();
+        chartRender();
+    }
 }
 
 function searchFor (searchTerm) {
@@ -77,8 +84,17 @@ function displayImages () {
     lastIndex.push(index);
     createImage(index);
     }
-    console.log(votes);
+    // console.log(votes);
 }
+
+// Create function to store image clicks in an array
+function getClicks() {
+    var clicks = [];
+    for (var i = 0; i < productData; i++) {
+      clicks.push(productData[i].clicks);
+    }
+    return clicks; 
+  }
 
 // Create function that saves results to local storage
 function saveResults() {
@@ -88,6 +104,7 @@ function saveResults() {
 // Create function that retrieves data from local storage
 function getResults() {
     var userResults = JSON.parse(localStorage.getItem('userResults'));
+    var results;
     if (userResults) {
         console.log('User Results already saved!');
         results = userResults;
@@ -97,6 +114,98 @@ function getResults() {
 // Create function that clears data in Local Storage
 function handleStorageClear() {
     localStorage.clear();
+}
+
+/********* Create function to render Chart */
+
+function chartRender() { 
+    var context = document.getElementById('myChart').getContext('2d');
+    var data = [productData[0].click,
+    productData[1].click,
+    productData[2].click,
+    productData[3].click,
+    productData[4].click,
+    productData[5].click,
+    productData[6].click,
+    productData[7].click,
+    productData[8].click,
+    productData[9].click,
+    productData[10].click,
+    productData[11].click,
+    productData[12].click,
+    productData[13].click,
+    productData[14].click,
+    productData[15].click,
+    productData[16].click,
+    productData[17].click,
+    productData[18].click,
+    productData[19].click
+   ];
+    var myChart = new Chart(context, {
+        type: 'bar',
+        data: {
+            labels: products,
+            datasets: [{
+                label: 'Number of Clicks',
+                data: data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgb(25, 144, 46, 0.2)',
+                    'rgb(250, 79, 25, 0.2)',
+                    'rgb(81, 102, 17, 0.2)',
+                    'rgb(92, 48, 39, 0.2)',
+                    'rgb(233, 2, 80, 0.2)',
+                    'rgb(161, 132, 173, 0.2)',
+                    'rgb(34, 247, 13, 0.2)',
+                    'rgb(201, 161, 185, 0.2)',
+                    'rgb(57, 28, 102, 0.2)',
+                    'rgb(134, 70, 129, 0.2)',
+                    'rgb(33, 119, 130, 0.2)',
+                    'rgb(3, 195, 217, 0.2)',
+                    'rgb(210, 253, 1, 0.2)',
+                    'rgb(76, 184, 146, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgb(25, 144, 46, 1)',
+                    'rgb(250, 79, 25, 1)',
+                    'rgb(81, 102, 17, 1)',
+                    'rgb(92, 48, 39, 1)',
+                    'rgb(233, 2, 80, 1)',
+                    'rgb(161, 132, 173, 1)',
+                    'rgb(34, 247, 13, 1)',
+                    'rgb(201, 161, 185, 1)',
+                    'rgb(57, 28, 102, 1)',
+                    'rgb(134, 70, 129, 1)',
+                    'rgb(33, 119, 130, 1)',
+                    'rgb(3, 195, 217, 1)',
+                    'rgb(210, 253, 1, 1)',
+                    'rgb(76, 184, 146, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
 }
 
 /* Object Constructor */
@@ -116,6 +225,11 @@ var productData = [];
 var votes = 0;
 var clearStorage = document.getElementById('clear-local');
 clearStorage.addEventListener('click', handleStorageClear);
+
+for (var j = 0; j < productData.length; j++) {
+    productClicks.push(productData[i].click);
+    console.log(productData.length);
+}
 
 // Create an object for each product
 for (var j = 0; j < products.length; j++) {
