@@ -48,11 +48,14 @@ function handler(event) {
     var search = event.target.id;
     console.log(search);
     var product = searchFor(search);
+
     product.click++;
     votes++;
     console.log(`You have clicked ${search} ${product.click} times`);
+    console.log("Total votes:", votes);
     
     displayImages();
+
     if (votes === 25) {
         document.getElementById("display").innerHTML = "";
         saveResults();
@@ -86,15 +89,6 @@ function displayImages () {
     }
     // console.log(votes);
 }
-
-// Create function to store image clicks in an array
-function getClicks() {
-    var clicks = [];
-    for (var i = 0; i < productData; i++) {
-      clicks.push(productData[i].clicks);
-    }
-    return clicks; 
-  }
 
 // Create function that saves results to local storage
 function saveResults() {
@@ -225,11 +219,6 @@ var productData = [];
 var votes = 0;
 var clearStorage = document.getElementById('clear-local');
 clearStorage.addEventListener('click', handleStorageClear);
-
-for (var j = 0; j < productData.length; j++) {
-    productClicks.push(productData[i].click);
-    console.log(productData.length);
-}
 
 // Create an object for each product
 for (var j = 0; j < products.length; j++) {
