@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stats | BusMall App</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Luckiest+Guy|Open+Sans:bold|Orbitron:bold|Permanent+Marker|Russo+One|Special+Elite" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Implement Favicon image -->
+    <link rel="icon" type="image/png" href="img/favicon/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="img/favicon/favicon-16x16.png" sizes="16x16" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="navi">
+                <li class="navbar-logo"><a href="index.html"><img src="img/busmall-logo.png" id="logo" alt="" title="Welcome to BusMall!"></a>
+                </li>
+                <li class="navbar wordmark"><a href="index.html">BusMall&reg;</a></li>
+                <li class="navbar"><a href="index.html#about" class="tab" title="Find out all about us!">About</a>
+                </li>
+                <li class="navbar"><a href="application.html" class="tab" title="Find out all about us!">BusMall App</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article id="display"></article>
+        
+        <div class="canvas">
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <input type="button" id="clear-local" value="Clear My Stored Voting Data">
+        </main>
+    <footer>
+        <h5>&copy; 2019 DGtronicz&reg;</h5>
+    </footer>
+    <script src="js/Chart.min.js"></script>
+    <script src="js/statistics.js"></script>
+</body>
+</html>
